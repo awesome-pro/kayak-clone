@@ -3,43 +3,43 @@
 import { useState, useRef, useEffect } from 'react';
 import { ChevronLeft } from 'lucide-react';
 
-export default function BeachDestinationsCarousel() {
+export default function Dream() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const carouselRef = useRef<HTMLDivElement>(null);
   
   const destinations = [
     {
       id: 1,
-      region: 'Europe',
-      image: "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2e/c1/50/7b/caption.jpg?w=600&h=-1&s=1",
+      region: 'Rishikesh',
+      image: "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/15/4d/47/32/rishikesh.jpg?w=600&h=600&s=1",
       rating: 4.8,
       badge: '2025'
     },
     {
       id: 2,
-      region: 'Asia',
-      image: "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2e/c1/50/f6/caption.jpg?w=600&h=-1&s=1",
+      region: 'Mussoorie',
+      image: "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/15/4d/45/b7/mussoorie.jpg?w=600&h=600&s=1",
       rating: 4.7,
       badge: '2025'
     },
     {
       id: 3,
-      region: 'South Pacific',
-      image: "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2e/c1/51/0b/caption.jpg?w=600&h=-1&s=1",
+      region: 'Dehradun',
+      image: "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/10/de/e2/78/view-from-upwards.jpg?w=600&h=600&s=1",
       rating: 4.6,
       badge: '2025'
     },
     {
       id: 4,
-      region: 'Caribbean',
-      image: "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2e/c1/51/9a/caption.jpg?w=600&h=-1&s=1",
+      region: 'Jim Corbett',
+      image: "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/01/1e/0d/db/the-magnificent-corbett.jpg?w=600&h=600&s=1",
       rating: 4.7,
       badge: '2025'
     },
     {
       id: 5,
-      region: 'Americas',
-      image: "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2e/c1/4f/f7/caption.jpg?w=600&h=-1&s=1",
+      region: 'Vrindavan',
+      image: "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/11/ee/20/c6/glittering-amber-light.jpg?w=600&h=600&s=1",
       rating: 4.5,
       badge: '2025'
     }
@@ -65,15 +65,15 @@ export default function BeachDestinationsCarousel() {
   };
 
   return (
-    <div className="mx-auto px-4 py-8 max-w-screen lg:max-w-6xl overflow-scroll">
+    <div className="max-w-6xl mx-auto px-4 py-8">
       {/* Header Section */}
       <div className="mb-6">
-        <h2 className="text-3xl font-bold text-slate-900 mb-2">Explore the world's most stunning seasides</h2>
-        <p className="text-slate-700 text-lg">2025's Travelers' Choice Awards Best of the Best Beaches</p>
+        <h2 className="text-3xl font-bold text-slate-900 mb-2">Dream Your Next Trip</h2>
+        <p className="text-slate-700 text-lg">Weekend getaways from New Delhi</p>
       </div>
       
       {/* Carousel Container */}
-      <div className="relative">
+      <div className="relative max-w-screen">
         {/* Navigation Button - Left */}
         <button 
           onClick={() => scroll('left')}

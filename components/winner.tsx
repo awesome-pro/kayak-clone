@@ -3,11 +3,12 @@
 import { motion } from 'framer-motion'
 import { Award } from 'lucide-react'
 import { Button } from '@/components/ui/button'
+import Image from 'next/image'
 
 export function WinnersSection() {
   return (
-    <section className="relative overflow-hidden bg-[#FAF1ED] py-16 md:py-24">
-      <div className="container mx-auto px-4">
+    <section className="relative overflow-hidden bg-[#fce7de] px-6 md:px-auto py-16 md:py-24">
+      <div className="max-w-6xl mx-auto">
         <div className="flex flex-col md:flex-row items-center justify-between gap-12">
           {/* Left Content */}
           <motion.div 
@@ -17,9 +18,7 @@ export function WinnersSection() {
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
           >
-            <div className="bg-[#FF5D5D] w-14 h-14 rounded-full flex items-center justify-center mb-6">
-              <Award className="w-8 h-8 text-white" />
-            </div>
+            <Image src={'https://static.tacdn.com/img2/travelers_choice/2023/TC_badge_yellow.svg'} alt="Travelers' Choice" width={100} height={100} />
             <h2 className="text-4xl md:text-5xl font-bold mb-6">
               Travelers' Choice Awards Best of the Best
             </h2>
@@ -42,14 +41,18 @@ export function WinnersSection() {
             viewport={{ once: true }}
           >
             <div className="relative">
-              <img 
+              <Image 
                 src="https://images.pexels.com/photos/3278215/pexels-photo-3278215.jpeg"
                 alt="Traveler exploring temple"
-                className="w-full h-[400px] object-cover rounded-2xl"
+                width={1500}
+                height={400}
+                className="w-full object-cover rounded-2xl"
+                priority
               />
               {/* Decorative Elements */}
-              <div className="absolute -top-6 -right-6 w-24 h-24 bg-[#FFB700] rounded-full" />
-              <div className="absolute -bottom-4 -left-4 w-16 h-16 bg-[#00AA6C] rounded-full" />
+              <div className="absolute -top-10 -right-10 w-32 h-32 bg-[#FFB700] rounded-full" />
+              <div className="absolute -bottom-10 -left-10 w-24 h-24 bg-[#00AA6C] rounded-full" />
+              <div className="absolute -top-3 -left-3 w-12 h-12 bg-[#f43c7d] rounded-full" />
             </div>
           </motion.div>
         </div>

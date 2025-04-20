@@ -1,111 +1,125 @@
-import { Suspense } from "react"
-import Image from "next/image"
-import Link from "next/link"
-import { MapPin, Hotel, Utensils, Ticket, Coffee, Menu } from "lucide-react"
 
-import { Button } from "@/components/ui/button"
-import SearchBar from "@/components/search-bar"
 import PopularDestinations from "@/components/popular-destinations"
-import TrendingDestinations from "@/components/trending-destinations"
-import TopExperiences from "@/components/top-experiences"
-import TripIdeas from "@/components/trip-ideas"
 import Footer from "@/components/footer"
-import { ReviewsSection } from "@/components/recent-reviews"
 import { WinnersSection } from "@/components/winner"
+import { AnimatedTestimonials } from "@/components/ui/animated-testimonials"
+import Sponsor from "@/components/sponser"
+import TravelPlanner from "@/components/ai"
+import Navbar from "@/components/navbar"
+import TourCardsCarousel from "@/components/tour-cards-carousel"
+import Dream from "@/components/ui/dream"
+import SearchBar from "@/components/search-bar"
 
 export default function Home() {
+  // Delhi tour data
+  const delhiTours = [
+    {
+      id: 1,
+      title: "Full Day Old and New Delhi City Tour",
+      image: "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2c/db/8f/99/caption.jpg?w=600&h=600&s=1",
+      rating: 4.9,
+      reviewCount: 2816,
+      price: 37,
+      currency: "$",
+      badge: "2024"
+    },
+    {
+      id: 2,
+      title: "All Inclusive Day Trip to Taj Mahal, Agra Fort and Baby Taj from Delhi by Car",
+      image: "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1a/5a/ea/82/caption.jpg?w=600&h=600&s=1",
+      rating: 4.7,
+      reviewCount: 315,
+      price: 45,
+      currency: "$",
+      isLikelyToSellOut: true
+    },
+    {
+      id: 3,
+      title: "Private Sunrise Taj Mahal Trip from Delhi all Inclusive",
+      image: "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/21/7f/47/3a/caption.jpg?w=600&h=600&s=1",
+      rating: 4.9,
+      reviewCount: 1458,
+      price: 88,
+      currency: "$"
+    },
+    {
+      id: 4,
+      title: "Same Day Taj Mahal, Agra Fort & Baby Taj Tour from Delhi by Car",
+      image: "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/21/67/e5/07/caption.jpg?w=600&h=600&s=1",
+      rating: 4.9,
+      reviewCount: 2787,
+      price: 57,
+      currency: "$"
+    },
+    {
+      id: 5,
+      title: "Delhi to Agra and Taj Mahal Private Day Trip by Express Train with Lunch",
+      image: "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2a/1a/b2/8e/caption.jpg?w=600&h=600&s=1",
+      rating: 4.8,
+      reviewCount: 1245,
+      price: 69,
+      currency: "$"
+    }
+  ];
+
+  const testimonials = [
+    {
+      quote:
+        "The attention to detail and innovative features have completely transformed our workflow. This is exactly what we've been looking for.",
+      name: "Sarah Chen",
+      designation: "Product Manager at TechFlow",
+      src: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=3560&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    },
+    {
+      quote:
+        "Implementation was seamless and the results exceeded our expectations. The platform's flexibility is remarkable.",
+      name: "Michael Rodriguez",
+      designation: "CTO at InnovateSphere",
+      src: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    },
+    {
+      quote:
+        "This solution has significantly improved our team's productivity. The intuitive interface makes complex tasks simple.",
+      name: "Emily Watson",
+      designation: "Operations Director at CloudScale",
+      src: "https://images.unsplash.com/photo-1623582854588-d60de57fa33f?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    },
+    {
+      quote:
+        "Outstanding support and robust features. It's rare to find a product that delivers on all its promises.",
+      name: "James Kim",
+      designation: "Engineering Lead at DataPro",
+      src: "https://images.unsplash.com/photo-1636041293178-808a6762ab39?q=80&w=3464&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    },
+    {
+      quote:
+        "The scalability and performance have been game-changing for our organization. Highly recommend to any growing business.",
+      name: "Lisa Thompson",
+      designation: "VP of Technology at FutureNet",
+      src: "https://images.unsplash.com/photo-1624561172888-ac93c696e10c?q=80&w=2592&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    },
+  ];
+
   return (
-    <div className="flex min-h-screen flex-col">
-      <header className="sticky top-0 z-50 w-full border-b bg-white">
-        <div className="container flex h-16 items-center justify-between px-4 md:px-6">
-          <div className="flex items-center gap-4">
-            <Link href="/" className="flex items-center gap-2">
-              <Image src="https://static.tacdn.com/img2/brand_refresh/Tripadvisor_lockup_horizontal_secondary_registered.svg" alt="TripAdvisor" width={150} height={40} className="h-10 w-auto" />
-            </Link>
-          </div>
-          <nav className="hidden md:flex items-center gap-6">
-            <Link href="#" className="text-sm font-medium flex items-center gap-1">
-              <Hotel className="h-4 w-4" />
-              Hotels
-            </Link>
-            <Link href="#" className="text-sm font-medium flex items-center gap-1">
-              <Utensils className="h-4 w-4" />
-              Restaurants
-            </Link>
-            <Link href="#" className="text-sm font-medium flex items-center gap-1">
-              <Ticket className="h-4 w-4" />
-              Things to Do
-            </Link>
-            <Link href="#" className="text-sm font-medium flex items-center gap-1">
-              <Coffee className="h-4 w-4" />
-              Vacation Rentals
-            </Link>
-            <Link href="#" className="text-sm font-medium flex items-center gap-1">
-              <MapPin className="h-4 w-4" />
-              Travel Stories
-            </Link>
-          </nav>
-          <div className="flex items-center gap-4">
-            <Link href="#" className="hidden md:flex text-sm font-medium">
-              Review
-            </Link>
-            <Link href="#" className="hidden md:flex text-sm font-medium">
-              Trips
-            </Link>
-            <Link href="#" className="hidden md:flex text-sm font-medium">
-              Alerts
-            </Link>
-            <Link href="#" className="hidden md:flex text-sm font-medium">
-              Sign in
-            </Link>
-            <Button size="sm" className="hidden md:flex bg-black hover:bg-gray-800">
-              Join
-            </Button>
-            <Button variant="ghost" size="icon" className="md:hidden">
-              <Menu className="h-5 w-5" />
-              <span className="sr-only">Toggle menu</span>
-            </Button>
-          </div>
-        </div>
-      </header>
-      <main className="flex-1">
-        <section className="relative">
-          <div className="absolute inset-0 bg-gradient-to-b from-black/50 to-black/20 z-10" />
-          <div className="relative h-[500px] w-full overflow-hidden">
-            <Image
-              src="/placeholder.svg?height=1080&width=1920"
-              alt="Travel destinations"
-              fill
-              className="object-cover"
-              priority
-            />
-          </div>
-          <div className="absolute inset-0 z-20 flex flex-col items-center justify-center px-4 text-center">
-            <h1 className="text-3xl font-bold tracking-tighter text-white sm:text-5xl md:text-6xl">
-              Find your perfect trip
-            </h1>
-            <p className="mt-4 max-w-[600px] text-white md:text-xl">
-              Plan and book your next adventure with recommendations from travelers like you
-            </p>
-            <div className="mt-8 w-full max-w-3xl">
-              <Suspense fallback={<div className="h-14 bg-white/20 rounded-full animate-pulse" />}>
-                <SearchBar />
-              </Suspense>
-            </div>
-          </div>
-        </section>
-
-        <PopularDestinations />
-
-        <TrendingDestinations />
-
-        <TopExperiences />
-
-        <ReviewsSection />
-
-        <TripIdeas />
-        <WinnersSection />
-      </main>
+    <div className="flex min-h-screen flex-col ">
+      <Navbar />
+      <SearchBar />
+      <TravelPlanner />
+      <PopularDestinations />
+      <TourCardsCarousel 
+        title="Ways to tour New Delhi" 
+        subtitle="Book these experiences for a close-up look at New Delhi."
+        tours={delhiTours}
+      />
+      {/* <Dream /> */}
+      <Sponsor />
+      <WinnersSection />
+      <div className="w-full flex items-center justify-center my-12">
+        <h1 className="text-3xl font-bold tracking-tighter sm:text-5xl md:text-6xl">
+          What our customers say
+        </h1>
+      </div>
+      <AnimatedTestimonials testimonials={testimonials} />
       <Footer />
     </div>
   )
