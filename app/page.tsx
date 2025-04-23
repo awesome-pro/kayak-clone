@@ -9,6 +9,8 @@ import Navbar from "@/components/navbar"
 import TourCardsCarousel from "@/components/tour-cards-carousel"
 import Dream from "@/components/ui/dream"
 import SearchBar from "@/components/search-bar"
+import Dream2 from "@/components/ui/dream2"
+import ExploreSection from "@/components/ui/award"
 
 export default function Home() {
   // Delhi tour data
@@ -111,7 +113,9 @@ export default function Home() {
         subtitle="Book these experiences for a close-up look at New Delhi."
         tours={delhiTours}
       />
-      {/* <Dream /> */}
+      <ExploreSection />
+      <Dream />
+      <Dream2 />
       <Sponsor />
       <WinnersSection />
       <div className="w-full flex items-center justify-center my-12">

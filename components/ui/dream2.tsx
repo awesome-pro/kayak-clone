@@ -1,45 +1,45 @@
 'use client';
 
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef } from 'react';
 import { ChevronLeft } from 'lucide-react';
 
-export default function Dream() {
+export default function Dream2() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const carouselRef = useRef<HTMLDivElement>(null);
   
   const destinations = [
     {
       id: 1,
-      region: 'Rishikesh',
-      image: "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/15/4d/47/32/rishikesh.jpg?w=600&h=600&s=1",
+      region: 'Las Vegas, NV',
+      image: "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2a/34/2d/28/caption.jpg?w=600&h=600&s=1&cx=662&cy=604&chk=v1_8984ddf3493edfb8c896",
       rating: 4.8,
       badge: '2025'
     },
     {
       id: 2,
-      region: 'Mussoorie',
-      image: "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/15/4d/45/b7/mussoorie.jpg?w=600&h=600&s=1",
+      region: 'Reyklavik, Iceland',
+      image: "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/27/84/4d/17/caption.jpg?w=600&h=600&s=1",
       rating: 4.7,
       badge: '2025'
     },
     {
       id: 3,
-      region: 'Dehradun',
-      image: "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/10/de/e2/78/view-from-upwards.jpg?w=600&h=600&s=1",
+      region: 'London, UK',
+      image: "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0d/af/70/3c/the-white-tower-the-norman.jpg?w=600&h=-1&s=1",
       rating: 4.6,
       badge: '2025'
     },
     {
       id: 4,
-      region: 'Jim Corbett',
-      image: "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/01/1e/0d/db/the-magnificent-corbett.jpg?w=600&h=600&s=1",
+      region: 'Florance, Italy',
+      image: "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1b/33/dc/8a/caption.jpg?w=600&h=600&s=1",
       rating: 4.7,
       badge: '2025'
     },
     {
       id: 5,
-      region: 'Vrindavan',
-      image: "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/11/ee/20/c6/glittering-amber-light.jpg?w=600&h=600&s=1",
+      region: 'Barcelona, Spain',
+      image: "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1c/ae/5d/da/caption.jpg?w=600&h=600&s=1",
       rating: 4.5,
       badge: '2025'
     }
@@ -68,8 +68,7 @@ export default function Dream() {
     <div className="max-w-6xl mx-auto px-4 py-8">
       {/* Header Section */}
       <div className="mb-6">
-        <h2 className="text-3xl font-bold text-slate-900 mb-2">Dream Your Next Trip</h2>
-        <p className="text-slate-700 text-lg">Weekend getaways from New Delhi</p>
+        <p className="text-slate-700 text-2xl font-semibold">Top Destinations for you</p>
       </div>
       
       {/* Carousel Container */}
@@ -92,7 +91,7 @@ export default function Dream() {
           {destinations.map((destination) => (
             <div 
               key={destination.id}
-              className="min-w-[300px] sm:min-w-[320px] md:min-w-[280px] flex-shrink-0 snap-start rounded-2xl overflow-hidden shadow-md hover:shadow-lg transition-shadow relative group cursor-pointer"
+              className="min-w-[300px] sm:min-w-[320px] md:min-w-[280px] flex-shrink-0 snap-start rounded-2xl overflow-hidden shadow-md hover:shadow-lg transition-shadow relative group"
             >
               {/* Image Container */}
               <div className="relative h-64 w-full">
@@ -101,9 +100,7 @@ export default function Dream() {
                   alt={`${destination.region} beaches`}
                   className="w-full h-full object-cover"
                 />
-              {/* White overlay on hover */}
-              <div className="absolute inset-0 bg-white/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-              </div>
+                </div>
               
               {/* Text Content */}
               <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/90 to-black/10">
