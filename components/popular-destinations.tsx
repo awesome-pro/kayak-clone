@@ -68,8 +68,8 @@ export default function BeachDestinationsCarousel() {
     <div className="mx-auto px-4 py-8 max-w-screen lg:max-w-6xl overflow-scroll">
       {/* Header Section */}
       <div className="mb-6">
-        <h2 className="text-3xl font-bold text-slate-900 mb-2">Explore the world's most stunning seasides</h2>
-        <p className="text-slate-700 text-lg">2025's Travelers' Choice Awards Best of the Best Beaches</p>
+        <h2 className="text-2xl font-semibold text-slate-900 mb-2">Explore the world's most stunning seasides</h2>
+        <p className="text-slate-700 text-md">2025's Travelers' Choice Awards Best of the Best Beaches</p>
       </div>
       
       {/* Carousel Container */}
@@ -92,7 +92,7 @@ export default function BeachDestinationsCarousel() {
           {destinations.map((destination) => (
             <div 
               key={destination.id}
-              className="min-w-[300px] sm:min-w-[320px] md:min-w-[280px] flex-shrink-0 snap-start rounded-2xl overflow-hidden shadow-md hover:shadow-lg transition-shadow relative group"
+              className="min-w-[300px] sm:min-w-[320px] md:min-w-[280px] flex-shrink-0 snap-start rounded-2xl overflow-hidden shadow-md hover:shadow-lg transition-shadow relative group cursor-pointer"
             >
               {/* Image Container */}
               <div className="relative h-64 w-full">
@@ -101,6 +101,7 @@ export default function BeachDestinationsCarousel() {
                   alt={`${destination.region} beaches`}
                   className="w-full h-full object-cover"
                 />
+                <div className="absolute inset-0 bg-white/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               </div>
               
               {/* Text Content */}

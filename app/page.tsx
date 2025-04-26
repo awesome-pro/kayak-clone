@@ -3,102 +3,56 @@ import PopularDestinations from "@/components/popular-destinations"
 import Footer from "@/components/footer"
 import { WinnersSection } from "@/components/winner"
 import { AnimatedTestimonials } from "@/components/ui/animated-testimonials"
-import Sponsor from "@/components/sponser"
 import TravelPlanner from "@/components/ai"
 import Navbar from "@/components/navbar"
-import TourCardsCarousel from "@/components/tour-cards-carousel"
 import Dream from "@/components/ui/dream"
 import SearchBar from "@/components/search-bar"
 import Dream2 from "@/components/ui/dream2"
 import ExploreSection from "@/components/ui/award"
+import TourCarousel from "@/components/tour-carousel"
+import FAQSection from "@/components/ui/faq-section"
 
 export default function Home() {
-  // Delhi tour data
-  const delhiTours = [
-    {
-      id: 1,
-      title: "Full Day Old and New Delhi City Tour",
-      image: "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2c/db/8f/99/caption.jpg?w=600&h=600&s=1",
-      rating: 4.9,
-      reviewCount: 2816,
-      price: 37,
-      currency: "$",
-      badge: "2024"
-    },
-    {
-      id: 2,
-      title: "All Inclusive Day Trip to Taj Mahal, Agra Fort and Baby Taj from Delhi by Car",
-      image: "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1a/5a/ea/82/caption.jpg?w=600&h=600&s=1",
-      rating: 4.7,
-      reviewCount: 315,
-      price: 45,
-      currency: "$",
-      isLikelyToSellOut: true
-    },
-    {
-      id: 3,
-      title: "Private Sunrise Taj Mahal Trip from Delhi all Inclusive",
-      image: "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/21/7f/47/3a/caption.jpg?w=600&h=600&s=1",
-      rating: 4.9,
-      reviewCount: 1458,
-      price: 88,
-      currency: "$"
-    },
-    {
-      id: 4,
-      title: "Same Day Taj Mahal, Agra Fort & Baby Taj Tour from Delhi by Car",
-      image: "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/21/67/e5/07/caption.jpg?w=600&h=600&s=1",
-      rating: 4.9,
-      reviewCount: 2787,
-      price: 57,
-      currency: "$"
-    },
-    {
-      id: 5,
-      title: "Delhi to Agra and Taj Mahal Private Day Trip by Express Train with Lunch",
-      image: "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2a/1a/b2/8e/caption.jpg?w=600&h=600&s=1",
-      rating: 4.8,
-      reviewCount: 1245,
-      price: 69,
-      currency: "$"
-    }
-  ];
-
   const testimonials = [
     {
       quote:
-        "The attention to detail and innovative features have completely transformed our workflow. This is exactly what we've been looking for.",
+        "Booking our tour to the Taj Mahal through this site was the best decision we made. The guide was knowledgeable and the entire experience was seamless from start to finish.",
       name: "Sarah Chen",
-      designation: "Product Manager at TechFlow",
-      src: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=3560&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      designation: "Traveled to Delhi, April 2025",
+      src: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=3560&auto=format&fit=crop",
+      rating: 5.0
     },
     {
       quote:
-        "Implementation was seamless and the results exceeded our expectations. The platform's flexibility is remarkable.",
+        "The 'Full Day Old and New Delhi City Tour' exceeded all our expectations. Our guide knew all the hidden spots and helped us avoid the crowds. Worth every penny!",
       name: "Michael Rodriguez",
-      designation: "CTO at InnovateSphere",
-      src: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      designation: "Family trip to India, March 2025",
+      src: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=3540&auto=format&fit=crop",
+      rating: 4.8
     },
     {
       quote:
-        "This solution has significantly improved our team's productivity. The intuitive interface makes complex tasks simple.",
+        "As a solo traveler, I was concerned about safety, but this platform connected me with reliable guides who made my Delhi experience unforgettable. The sunrise Taj Mahal trip was magical!",
       name: "Emily Watson",
-      designation: "Operations Director at CloudScale",
-      src: "https://images.unsplash.com/photo-1623582854588-d60de57fa33f?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      designation: "Solo traveler, February 2025",
+      src: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=3540&auto=format&fit=crop",
+      rating: 4.9
     },
     {
       quote:
-        "Outstanding support and robust features. It's rare to find a product that delivers on all its promises.",
+        "The 'Likely to Sell Out' badge was spot on - we almost missed booking our tour but managed to get the last spots. The experience was incredible and our photos are amazing.",
       name: "James Kim",
-      designation: "Engineering Lead at DataPro",
-      src: "https://images.unsplash.com/photo-1636041293178-808a6762ab39?q=80&w=3464&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      designation: "Honeymoon trip, January 2025",
+      src: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=3464&auto=format&fit=crop",
+      rating: 5.0
     },
     {
       quote:
-        "The scalability and performance have been game-changing for our organization. Highly recommend to any growing business.",
+        "We've used many travel platforms before, but the ease of booking and the quality of tours here is unmatched. The Delhi to Agra express train tour was comfortable and well-organized.",
       name: "Lisa Thompson",
-      designation: "VP of Technology at FutureNet",
-      src: "https://images.unsplash.com/photo-1624561172888-ac93c696e10c?q=80&w=2592&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      designation: "Group tour, December 2024",
+      src: "https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=2592&auto=format&fit=crop",
+      rating: 4.7
     },
   ];
 
@@ -108,22 +62,34 @@ export default function Home() {
       <SearchBar />
       <TravelPlanner />
       <PopularDestinations />
-      <TourCardsCarousel 
-        title="Ways to tour New Delhi" 
-        subtitle="Book these experiences for a close-up look at New Delhi."
-        tours={delhiTours}
-      />
+      <TourCarousel />
       <ExploreSection />
       <Dream />
       <Dream2 />
-      <Sponsor />
       <WinnersSection />
-      <div className="w-full flex items-center justify-center my-12">
-        <h1 className="text-3xl font-bold tracking-tighter sm:text-5xl md:text-6xl">
-          What our customers say
+      <div className="w-full flex flex-col items-center justify-center my-12 px-4">
+        <h1 className="text-3xl font-bold tracking-tighter text-center sm:text-4xl md:text-5xl text-gray-900">
+          Travelers Share Their Experiences
         </h1>
+        <p className="mt-4 text-xl text-center text-gray-600 max-w-3xl">
+          Authentic reviews from travelers who explored India with our top-rated tours
+        </p>
       </div>
-      <AnimatedTestimonials testimonials={testimonials} />
+      <AnimatedTestimonials testimonials={testimonials} autoplay={true} />
+      
+      {/* Visual divider */}
+      <div className="max-w-6xl mx-auto px-4 py-8">
+        <div className="relative">
+          <div className="absolute inset-0 flex items-center">
+            <div className="w-full border-t border-gray-200"></div>
+          </div>
+          <div className="relative flex justify-center">
+            <span className="bg-white px-4 text-sm text-gray-500">Plan your perfect trip</span>
+          </div>
+        </div>
+      </div>
+      
+      <FAQSection />
       <Footer />
     </div>
   )

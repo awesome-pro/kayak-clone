@@ -11,9 +11,9 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Online Courses - Learn Anything, On Your Schedule | Udemy",
-  description: "Udemy is an online learning and teaching marketplace with over 213,000 courses and 62 million students. Learn programming, marketing, data science and more.",
-  keywords: "Udemy, online courses, learning, teaching, skills, development",
+  title: "Tripadvisor: Over a billion reviews and contributions for 100+ million travelers",
+  description: "Tripadvisor is the world's largest travel website, with over a billion reviews and contributions for 100+ million travelers.",
+  keywords: "Tripadvisor, travel, reviews, contributions, travelers",
 };
 
 export default function RootLayout({

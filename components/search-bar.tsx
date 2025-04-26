@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useRef, useEffect } from "react"
-import { Search, MapPin, Calendar, X, Navigation, Clock, ChevronRight } from "lucide-react"
+import { Search, MapPin, Calendar, X, Navigation, Clock, ChevronRight, Home, Hotel, Utensils, Plane, Building } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -11,6 +11,8 @@ import { Calendar as CalendarComponent } from "@/components/ui/calendar"
 import { DateRange } from "react-day-picker"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { cn } from "@/lib/utils"
+import { IoRestaurantOutline } from "react-icons/io5";
+import { MdOutlineAttractions } from "react-icons/md";
 
 // Mock data - in a real app, move this to a separate file
 const popularDestinations = [
@@ -36,19 +38,12 @@ const popularDestinations = [
   }
 ];
 
-
-const recentSearches = [
-  "Bali, Indonesia",
-  "Tokyo, Japan",
-  "Barcelona, Spain",
-  "Rome, Italy"
-];
-
 export default function SearchBar() {
   const [searchQuery, setSearchQuery] = useState("")
   const [date, setDate] = useState<DateRange | undefined>();
   const [guests, setGuests] = useState("2")
   const [activeTab, setActiveTab] = useState("hotels")
+  const [searchHeading, setSearchHeading] = useState("Explore places to rent")
   const [isSearchFocused, setIsSearchFocused] = useState(false)
   const searchRef = useRef<HTMLDivElement>(null)
 
@@ -65,9 +60,67 @@ export default function SearchBar() {
       document.removeEventListener("mousedown", handleClickOutside)
     }
   }, [])
+  
+  // Get the position of the search input for dialog positioning
+  const [searchInputRect, setSearchInputRect] = useState<DOMRect | null>(null)
+  const searchInputRef = useRef<HTMLInputElement>(null)
+  
+  // Check if the search bar is in the navbar (sticky mode)
+  const [isSticky, setIsSticky] = useState(false)
+  
+  // Update the search input position when it's focused
+  const updateSearchInputPosition = () => {
+    if (searchInputRef.current) {
+      setSearchInputRect(searchInputRef.current.getBoundingClientRect())
+    }
+  }
+  
+  // Update position on window resize and check if search bar is sticky
+  useEffect(() => {
+    const handleScroll = () => {
+      const searchBarElement = document.getElementById('main-search-bar')
+      if (searchBarElement) {
+        const searchBarPosition = searchBarElement.getBoundingClientRect().top
+        setIsSticky(searchBarPosition < 0)
+      }
+    }
+    
+    if (isSearchFocused) {
+      updateSearchInputPosition()
+      window.addEventListener('resize', updateSearchInputPosition)
+    }
+    
+    window.addEventListener('scroll', handleScroll)
+    
+    return () => {
+      window.removeEventListener('resize', updateSearchInputPosition)
+      window.removeEventListener('scroll', handleScroll)
+    }
+  }, [isSearchFocused])
 
   const handleTabChange = (value: string) => {
     setActiveTab(value)
+    
+    // Update heading based on selected tab
+    switch(value) {
+      case "all":
+        setSearchHeading("Explore places to rent")
+        break
+      case "hotels":
+        setSearchHeading("Find the perfect hotel")
+        break
+      case "things-to-do":
+        setSearchHeading("Discover things to do")
+        break
+      case "restaurants":
+        setSearchHeading("Find great places to eat")
+        break
+      case "vacation-rentals":
+        setSearchHeading("Find your perfect vacation rental")
+        break
+      default:
+        setSearchHeading("Explore places to rent")
+    }
   }
 
   const placeholderByTab = {
@@ -78,49 +131,42 @@ export default function SearchBar() {
   }
 
   return (
-    <div className="w-full max-w-4xl mx-auto my-12">
-      <div className="relative" ref={searchRef}>
+    <div className="w-full max-w-4xl mx-auto my-12 relative z-10">
+      <h1 className="text-5xl font-black text-center mb-8">{searchHeading}</h1>
+      <div id="main-search-bar" className="relative" ref={searchRef}>
         <Tabs 
           defaultValue="hotels" 
           value={activeTab}
           onValueChange={handleTabChange}
           className="w-full"
         >
-          <div className="bg-white rounded-t-xl shadow-sm">
-            <TabsList className="grid w-full grid-cols-2 md:grid-cols-4 bg-transparent h-auto p-1 gap-1">
-              <TabsTrigger 
-                value="hotels" 
-                className="py-3 rounded-md data-[state=active]:bg-white data-[state=active]:shadow-sm flex items-center justify-center gap-2"
-              >
-                <span className="hidden md:inline">Hotels</span>
-                <span className="md:hidden">🏨</span>
+          <div className="bg-white rounded-t-xl">
+            <TabsList className="grid w-full grid-cols-5 bg-transparent h-auto">
+            <TabsTrigger value="all" className="flex items-center justify-center gap-2">
+                <Home className="w-5 h-5" />
+                <span>Search All</span>
               </TabsTrigger>
-              <TabsTrigger 
-                value="things-to-do" 
-                className="py-3 rounded-md data-[state=active]:bg-white data-[state=active]:shadow-sm flex items-center justify-center gap-2"
-              >
-                <span className="hidden md:inline">Things to Do</span>
-                <span className="md:hidden">🎭</span>
+              <TabsTrigger value="hotels" className="flex items-center justify-center gap-2">
+                <Hotel className="w-5 h-5" />
+                <span>Hotels</span>
               </TabsTrigger>
-              <TabsTrigger 
-                value="restaurants" 
-                className="py-3 rounded-md data-[state=active]:bg-white data-[state=active]:shadow-sm flex items-center justify-center gap-2"
-              >
-                <span className="hidden md:inline">Restaurants</span>
-                <span className="md:hidden">🍽️</span>
+              <TabsTrigger value="things-to-do" className="flex items-center justify-center gap-2">
+                <MdOutlineAttractions className="w-5 h-5" />
+                <span>Things to Do</span>
               </TabsTrigger>
-              <TabsTrigger 
-                value="vacation-rentals" 
-                className="py-3 rounded-md data-[state=active]:bg-white data-[state=active]:shadow-sm flex items-center justify-center gap-2"
-              >
-                <span className="hidden md:inline">Vacation Rentals</span>
-                <span className="md:hidden">🏡</span>
+              <TabsTrigger value="restaurants" className="flex items-center justify-center gap-2">
+                <Utensils className="w-5 h-5" />
+                <span>Restaurants</span>
+              </TabsTrigger>
+              <TabsTrigger value="vacation-rentals" className="flex items-center justify-center gap-2">
+                <Building className="w-5 h-5" />
+                <span>Vacation Rentals</span>
               </TabsTrigger>
             </TabsList>
           </div>
 
           <div className={cn(
-            "bg-white rounded-full shadow-lg transition-all duration-200",
+            "bg-white rounded-full shadow-lg transition-all duration-200 mt-6",
             isSearchFocused ? "rounded-b-none" : ""
           )}>
             <TabsContent value="hotels" className="mt-0 p-0  rounded-full">
@@ -128,11 +174,15 @@ export default function SearchBar() {
                 <div className="relative w-full flex-1 rounded-full">
                   <MapPin className="absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 text-gray-500" />
                   <Input
+                    ref={searchInputRef}
                     placeholder={placeholderByTab[activeTab as keyof typeof placeholderByTab]}
                     className="w-full rounded-full pl-10 pr-4 py-6 border-2 focus-visible:ring-0 focus-visible:border-black"
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    onFocus={() => setIsSearchFocused(true)}
+                    onFocus={() => {
+                      setIsSearchFocused(true)
+                      updateSearchInputPosition()
+                    }}
                   />
                   {searchQuery && (
                     <button 
@@ -187,11 +237,15 @@ export default function SearchBar() {
                 <div className="relative w-full flex-1">
                   <MapPin className="absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 text-gray-500" />
                   <Input
+                    ref={searchInputRef}
                     placeholder={placeholderByTab[activeTab as keyof typeof placeholderByTab]}
                     className="w-full rounded-full pl-10 pr-4 py-6 border-2 focus-visible:ring-0 focus-visible:border-black"
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    onFocus={() => setIsSearchFocused(true)}
+                    onFocus={() => {
+                      setIsSearchFocused(true)
+                      updateSearchInputPosition()
+                    }}
                   />
                   {searchQuery && (
                     <button 
@@ -214,11 +268,15 @@ export default function SearchBar() {
                 <div className="relative w-full flex-1">
                   <MapPin className="absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 text-gray-500" />
                   <Input
+                    ref={searchInputRef}
                     placeholder={placeholderByTab[activeTab as keyof typeof placeholderByTab]}
                     className="w-full rounded-full pl-10 pr-4 py-6 border-2 focus-visible:ring-0 focus-visible:border-black"
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    onFocus={() => setIsSearchFocused(true)}
+                    onFocus={() => {
+                      setIsSearchFocused(true)
+                      updateSearchInputPosition()
+                    }}
                   />
                   {searchQuery && (
                     <button 
@@ -241,11 +299,15 @@ export default function SearchBar() {
                 <div className="relative w-full flex-1">
                   <MapPin className="absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 text-gray-500" />
                   <Input
+                    ref={searchInputRef}
                     placeholder={placeholderByTab[activeTab as keyof typeof placeholderByTab]}
                     className="w-full rounded-full pl-10 pr-4 py-6 border-2 focus-visible:ring-0 focus-visible:border-black"
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    onFocus={() => setIsSearchFocused(true)}
+                    onFocus={() => {
+                      setIsSearchFocused(true)
+                      updateSearchInputPosition()
+                    }}
                   />
                   {searchQuery && (
                     <button 
@@ -285,20 +347,83 @@ export default function SearchBar() {
           </div>
         </Tabs>
 
+        {/* Dark overlay with pointer events only on the overlay, not affecting scroll */}
+        {isSearchFocused && !isSticky && (
+          <div className="fixed inset-0 bg-black/60 z-40 pointer-events-auto" 
+            onClick={() => setIsSearchFocused(false)}
+            style={{ pointerEvents: 'auto' }}
+          ></div>
+        )}
+        
         {/* Search Suggestions Dropdown */}
-        {isSearchFocused && (
-          <div className="absolute w-full bg-white backdrop-blur-3xl shadow-lg rounded-xl border-t z-50">
-            {/* Nearby section */}
-            <div className="p-4">
-              <div className="flex items-center mb-2">
-                <Navigation className="h-5 w-5 text-gray-500 mr-2" />
-                <h3 className="font-medium text-sm">Nearby</h3>
+        {isSearchFocused && searchInputRect && !isSticky && (
+          <div 
+            className="fixed bg-white shadow-xl rounded-xl border z-50 w-full max-w-4xl"
+            style={{
+              top: `${searchInputRect.top + window.scrollY}px`,
+              left: '50%',
+              transform: 'translateX(-50%)',
+              maxHeight: '80vh',
+              overflowY: 'auto'
+            }}
+          >
+            {/* Search input at the top of dialog */}
+            <div className="p-4 border-b">
+              <div className="relative w-full">
+                <MapPin className="absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 text-gray-500" />
+                <Input
+                  placeholder={placeholderByTab[activeTab as keyof typeof placeholderByTab]}
+                  className="w-full rounded-full pl-10 pr-4 py-6 border-2 focus-visible:ring-0 focus-visible:border-black"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  autoFocus
+                />
+                {searchQuery && (
+                  <button 
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700"
+                    onClick={() => setSearchQuery("")}
+                  >
+                    <X className="h-5 w-5" />
+                  </button>
+                )}
               </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+            </div>
+            
+            {/* Nearby section */}
+            <div className="p-4 border-b">
+              <div className="flex items-center mb-4">
+                <Navigation className="h-5 w-5 text-gray-500 mr-2" />
+                <h3 className="font-medium">Nearby</h3>
+              </div>
+              <div className="space-y-3">
+                <button
+                  className="flex items-center gap-3 hover:bg-gray-50 p-2 rounded-md transition-colors cursor-pointer w-full"
+                  onClick={() => {
+                    setSearchQuery("Current location")
+                    setIsSearchFocused(false)
+                  }}
+                >
+                  <div className="relative h-12 w-12 rounded-md overflow-hidden flex-shrink-0 bg-blue-100 flex items-center justify-center">
+                    <Navigation className="h-6 w-6 text-blue-500" />
+                  </div>
+                  <div className="flex flex-col items-start">
+                    <span className="font-medium">Nearby</span>
+                    <span className="text-sm text-gray-500">Use current location</span>
+                  </div>
+                </button>
+              </div>
+            </div>
+            
+            {/* Popular Destinations */}
+            <div className="p-4">
+              <div className="flex items-center mb-4">
+                <h3 className="font-medium">Popular Destinations</h3>
+              </div>
+              <div className="space-y-3">
                 {popularDestinations.map((destination, index) => (
                   <button
                     key={index}
-                    className="flex items-center gap-3 hover:bg-gray-50 p-2 rounded-md transition-colors cursor-pointer"
+                    className="flex items-center gap-3 hover:bg-gray-50 p-2 rounded-md transition-colors cursor-pointer w-full"
                     onClick={() => {
                       setSearchQuery(destination.name)
                       setIsSearchFocused(false)
@@ -312,42 +437,12 @@ export default function SearchBar() {
                       />
                     </div>
                     <div className="flex flex-col items-start">
-                      <span className="font-medium text-sm">{destination.name}</span>
-                      <span className="text-xs text-gray-500">{destination.location}</span>
+                      <span className="font-medium">{destination.name}</span>
+                      <span className="text-sm text-gray-500">{destination.location}</span>
                     </div>
                   </button>
                 ))}
               </div>
-            </div>
-
-            {/* Recent searches */}
-            <div className="p-4 border-t">
-              <div className="flex items-center mb-2">
-                <Clock className="h-5 w-5 text-gray-500 mr-2" />
-                <h3 className="font-medium text-sm">Recent Searches</h3>
-              </div>
-              <ul className="space-y-2">
-                {recentSearches.map((search, index) => (
-                  <li key={index} className="cursor-pointer hover:bg-gray-50 rounded-md p-2 transition-colors">
-                    <button 
-                      className="w-full text-left text-sm flex items-center"
-                      onClick={() => {
-                        setSearchQuery(search)
-                        setIsSearchFocused(false)
-                      }}
-                    >
-                      <span>{search}</span>
-                      <ChevronRight className="h-4 w-4 ml-auto text-gray-400" />
-                    </button>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* Popular destinations */}
-            <div className="p-4 border-t">
-              <h3 className="font-medium text-sm mb-3">Popular Destinations</h3>
-              
             </div>
           </div>
         )}

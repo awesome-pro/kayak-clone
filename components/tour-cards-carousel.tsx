@@ -124,7 +124,7 @@ export default function TourCardsCarousel({ title, subtitle, tours }: TourCardsC
         {/* Navigation Button - Left */}
         <button 
           onClick={() => scroll('left')}
-          className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 z-10 bg-white rounded-full shadow-lg p-2 hover:bg-gray-100 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+          className="absolute left-0 top-1/2 -translate-x-4 z-10 bg-white rounded-full shadow-lg p-2 hover:bg-gray-100 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
           aria-label="Previous slide"
           disabled={currentIndex === 0}
         >
@@ -145,7 +145,7 @@ export default function TourCardsCarousel({ title, subtitle, tours }: TourCardsC
             <motion.div 
               key={tour.id}
               whileHover={{ y: -5 }}
-              className="h-full flex-shrink-0 snap-start rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300"
+              className="h-full flex-shrink-0 snap-start rounded-xl overflow-hidden transition-all duration-300"
             >
               {/* Image Container */}
               <div className="relative aspect-[4/3] w-full">
@@ -154,6 +154,7 @@ export default function TourCardsCarousel({ title, subtitle, tours }: TourCardsC
                   alt={tour.title}
                   className="w-full h-full object-cover"
                 />
+                <div className="absolute inset-0 bg-white/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 
                 {/* Badge */}
                 {tour.badge && (

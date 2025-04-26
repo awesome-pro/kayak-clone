@@ -260,7 +260,7 @@ export default function TravelPlanner() {
         ></div>
         
         {/* Content */}
-        <div className="relative flex flex-col justify-between h-full p-10 text-white z-10">
+        <div className="relative flex flex-col justify-between h-full p-10 text-white z-5">
           {/* Header */}
           <div>
             <div className="inline-flex items-center px-3 py-1 mb-4 text-sm font-medium bg-white/10 backdrop-blur-sm rounded-full">
@@ -270,14 +270,13 @@ export default function TravelPlanner() {
           </div>
           
           {/* Main content */}
-          <div className="z-10 max-w-lg mb-20">
+          <div className="z-5 max-w-lg mb-20">
             <h1 className="mb-4 text-6xl font-bold tracking-tight">
               Plan your kind of trip
             </h1>
             <p className="mb-8 text-3xl font-normal">
               Get custom recs for all the things you're into with AI trip builder.
             </p>
-          <div className="flex flex-col md:flex-row items-center justify-center gap-4">
             <Button 
                 className="inline-flex items-center rounded-full gap-2 px-6 py-6 text-lg font-medium bg-white text-black hover:bg-white/90 transition-all duration-300 hover:shadow-lg hover:shadow-cyan-400/20"
                 size="lg"
@@ -286,16 +285,6 @@ export default function TravelPlanner() {
                 <Wand2 className="w-5 h-5" />
                 <span>Start a trip with AI</span>
               </Button>
-              <Button 
-                variant={'outline'}
-                className="inline-flex items-center rounded-full gap-2 px-6 py-6 text-lg font-medium transition-all duration-500 bg-transparent ring-1 ring-white"
-                size="lg"
-                onClick={() => setIsDialogOpen(true)}
-              >
-                <Sparkles />
-                <span>Search in your words</span>
-              </Button>
-          </div>
           </div>
         </div>
 
@@ -323,7 +312,7 @@ export default function TravelPlanner() {
             </div>
             
             {/* Header */}
-            <div className="flex justify-between items-center relative z-10 mb-4">
+            <div className="flex justify-between items-center relative z-5 mb-4">
               <h2 className="text-xl font-bold text-white">AI Trip Planner</h2>
               <Button 
                 variant="ghost" 
@@ -336,7 +325,7 @@ export default function TravelPlanner() {
             </div>
             
             {/* Input area */}
-            <div className="relative z-10">
+            <div className="relative z-5">
               <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-full p-2 pl-5">
                 <input
                   ref={inputRef}
@@ -413,7 +402,7 @@ export default function TravelPlanner() {
                     <motion.div
                       animate={{ rotate: 360 }}
                       transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-                      className="relative z-10"
+                      className="relative z-5"
                     >
                       <Loader2 className="h-10 w-10 text-blue-500" />
                     </motion.div>

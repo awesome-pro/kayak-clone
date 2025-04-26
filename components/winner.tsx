@@ -7,12 +7,12 @@ import Image from 'next/image'
 
 export function WinnersSection() {
   return (
-    <section className="relative overflow-hidden bg-[#fce7de] px-6 md:px-auto py-16 md:py-24">
+    <section className="relative overflow-hidden bg-[#fdf7d9] px-6 md:px-auto py-16 md:py-24">
       <div className="max-w-6xl mx-auto">
         <div className="flex flex-col md:flex-row items-center justify-between gap-12">
           {/* Left Content */}
           <motion.div 
-            className="max-w-xl"
+            className="max-w-xl "
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
@@ -31,30 +31,20 @@ export function WinnersSection() {
               See the winners
             </Button>
           </motion.div>
-
-          {/* Right Image */}
-          <motion.div 
-            className="relative w-full md:w-1/2"
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            viewport={{ once: true }}
-          >
-            <div className="relative">
+          <div className="rounded-full -rotate-45 overflow-hidden relative">
               <Image 
                 src="https://images.pexels.com/photos/3278215/pexels-photo-3278215.jpeg"
                 alt="Traveler exploring temple"
-                width={1500}
-                height={400}
-                className="w-full object-cover rounded-2xl"
+                width={1100}
+                height={200}
+                className="w-full object-cover rotate-45"
                 priority
               />
-              {/* Decorative Elements */}
-              <div className="absolute -top-10 -right-10 w-32 h-32 bg-[#FFB700] rounded-full" />
-              <div className="absolute -bottom-10 -left-10 w-24 h-24 bg-[#00AA6C] rounded-full" />
-              <div className="absolute -top-3 -left-3 w-12 h-12 bg-[#f43c7d] rounded-full" />
-            </div>
-          </motion.div>
+            {/* Decorative Elements */}
+            <div className="absolute -top-10 -right-10 w-32 h-32 bg-[#FFB700] rounded-full" />
+            <div className="absolute -bottom-10 -left-10 w-24 h-24 bg-[#00AA6C] rounded-full" />
+            <div className="absolute -top-3 -left-3 w-12 h-12 bg-[#f43c7d] rounded-full" />
+          </div>
         </div>
       </div>
     </section>

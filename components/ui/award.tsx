@@ -2,6 +2,8 @@
 
 import Image from 'next/image';
 import { Heart } from 'lucide-react';
+import Link from 'next/link';
+import { useState } from 'react';
 
 interface ExploreCardProps {
   id: number;
@@ -11,21 +13,30 @@ interface ExploreCardProps {
 }
 
 const ExploreCard = ({ image, title, alt }: ExploreCardProps) => {
+  const [isHovered, setIsHovered] = useState(false);
+  
   return (
-    <div className="relative flex flex-col bg-white rounded-xl overflow-hidden">
+    <div 
+      className="relative flex flex-col rounded-xl overflow-hidden cursor-pointer"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
       <div className="relative h-[250px] w-full">
         <Image 
           src={image} 
           alt={alt || title}
           fill
-          className="object-cover"
+          className="object-cover rounded-xl"
         />
+        {/* Overlay layer that appears on hover */}
+        <div className={`absolute inset-0 bg-white/20 rounded-xl transition-opacity duration-200 ${isHovered ? 'opacity-100' : 'opacity-0'}`}></div>
+        
         <button className="absolute top-3 right-3 p-2 rounded-full bg-white/80 hover:bg-white transition-colors">
           <Heart className="h-5 w-5 text-gray-700" />
         </button>
       </div>
       <div className="p-4 text-center">
-        <h3 className="text-sm font-medium text-gray-900">{title}</h3>
+        <Link href={"/"} className="text-lg font-semibold hover:underline text-gray-900">{title}</Link>
       </div>
     </div>
   );
@@ -54,7 +65,7 @@ export default function ExploreSection() {
   ];
 
   return (
-    <section className="w-full bg-gray-200 py-12 px-4 md:px-8">
+    <section className="w-full bg-gray-200 py-12 px-4 md:px-32">
       <div className="max-w-7xl mx-auto">
         <h2 className="text-2xl font-bold text-gray-900 mb-8">More to explore</h2>
         

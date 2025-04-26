@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useRef } from 'react';
-import { ChevronLeft } from 'lucide-react';
+import { ArrowLeft, ArrowLeftCircle, ChevronLeft } from 'lucide-react';
 
 export default function Dream2() {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -68,7 +68,7 @@ export default function Dream2() {
     <div className="max-w-6xl mx-auto px-4 py-8">
       {/* Header Section */}
       <div className="mb-6">
-        <p className="text-slate-700 text-2xl font-semibold">Top Destinations for you</p>
+        <p className="text-slate-700 text-2xl font-semibold">Top Destinations for your next vacation</p>
       </div>
       
       {/* Carousel Container */}
@@ -76,10 +76,10 @@ export default function Dream2() {
         {/* Navigation Button - Left */}
         <button 
           onClick={() => scroll('left')}
-          className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 z-10 bg-white rounded-full shadow-lg p-2 hover:bg-gray-100 transition-all"
+          className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 z-10 bg-white rounded-full shadow-lg p-0 hover:bg-gray-100 transition-all"
           aria-label="Previous slide"
         >
-          <ChevronLeft className="h-6 w-6" />
+          <ArrowLeft className="h-10 w-10" />
         </button>
         
         {/* Carousel Track */}
@@ -91,7 +91,7 @@ export default function Dream2() {
           {destinations.map((destination) => (
             <div 
               key={destination.id}
-              className="min-w-[300px] sm:min-w-[320px] md:min-w-[280px] flex-shrink-0 snap-start rounded-2xl overflow-hidden shadow-md hover:shadow-lg transition-shadow relative group"
+              className="min-w-[300px] sm:min-w-[320px] md:min-w-[280px] flex-shrink-0 snap-start rounded-2xl overflow-hidden shadow-md hover:shadow-lg transition-shadow relative group cursor-pointer"
             >
               {/* Image Container */}
               <div className="relative h-64 w-full">
@@ -100,7 +100,8 @@ export default function Dream2() {
                   alt={`${destination.region} beaches`}
                   className="w-full h-full object-cover"
                 />
-                </div>
+                <div className="absolute inset-0 bg-white/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              </div>
               
               {/* Text Content */}
               <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/90 to-black/10">
