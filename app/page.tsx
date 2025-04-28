@@ -76,19 +76,6 @@ export default function Home() {
         </p>
       </div>
       <AnimatedTestimonials testimonials={testimonials} autoplay={true} />
-      
-      {/* Visual divider */}
-      <div className="max-w-6xl mx-auto px-4 py-8">
-        <div className="relative">
-          <div className="absolute inset-0 flex items-center">
-            <div className="w-full border-t border-gray-200"></div>
-          </div>
-          <div className="relative flex justify-center">
-            <span className="bg-white px-4 text-sm text-gray-500">Plan your perfect trip</span>
-          </div>
-        </div>
-      </div>
-      
       <FAQSection />
       <Footer />
     </div>

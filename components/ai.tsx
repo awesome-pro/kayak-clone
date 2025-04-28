@@ -7,6 +7,7 @@ import { Card } from "./ui/card";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
+import { Input } from "./ui/input";
 
 // Define the SpeechRecognition interface for TypeScript
 interface SpeechRecognitionEvent extends Event {
@@ -327,11 +328,11 @@ export default function TravelPlanner() {
             {/* Input area */}
             <div className="relative z-5">
               <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-full p-2 pl-5">
-                <input
+                <Input
                   ref={inputRef}
                   type="text"
                   placeholder="Describe your dream trip..."
-                  className="flex-1 bg-transparent border-none text-white placeholder:text-white/60 focus:outline-none"
+                  className="flex-1 bg-transparent border-none text-white placeholder:text-white/60 focus:outline-none outline-cyan-600"
                   value={prompt}
                   onChange={(e) => setPrompt(e.target.value)}
                   onKeyDown={(e) => e.key === 'Enter' && generateTrip()}

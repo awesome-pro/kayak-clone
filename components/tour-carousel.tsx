@@ -112,7 +112,7 @@ export default function TourCarousel() {
   };
 
   return (
-    <div className="max-w-6xl mx-auto px-4 py-8 overflow-scroll">
+    <div className="max-w-screen lg:max-w-6xl mx-auto px-4 py-8 overflow-scroll">
       {/* Header Section */}
       <div className="mb-6">
         <h2 className="text-2xl font-bold text-slate-900 mb-2">Ways to tour New Delhi</h2>

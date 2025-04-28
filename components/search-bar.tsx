@@ -13,6 +13,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { cn } from "@/lib/utils"
 import { IoRestaurantOutline } from "react-icons/io5";
 import { MdOutlineAttractions } from "react-icons/md";
+import { DatePickerWithRange } from "./ui/date-range"
 
 // Mock data - in a real app, move this to a separate file
 const popularDestinations = [
@@ -144,23 +145,23 @@ export default function SearchBar() {
             <TabsList className="grid w-full grid-cols-5 bg-transparent h-auto">
             <TabsTrigger value="all" className="flex items-center justify-center gap-2">
                 <Home className="w-5 h-5" />
-                <span>Search All</span>
+                <span className="hidden md:block">Search All</span>
               </TabsTrigger>
               <TabsTrigger value="hotels" className="flex items-center justify-center gap-2">
                 <Hotel className="w-5 h-5" />
-                <span>Hotels</span>
+                <span className="hidden md:block">Hotels</span>
               </TabsTrigger>
               <TabsTrigger value="things-to-do" className="flex items-center justify-center gap-2">
                 <MdOutlineAttractions className="w-5 h-5" />
-                <span>Things to Do</span>
+                <span className="hidden md:block">Things to Do</span>
               </TabsTrigger>
               <TabsTrigger value="restaurants" className="flex items-center justify-center gap-2">
                 <Utensils className="w-5 h-5" />
-                <span>Restaurants</span>
+                <span className="hidden md:block">Restaurants</span>
               </TabsTrigger>
               <TabsTrigger value="vacation-rentals" className="flex items-center justify-center gap-2">
                 <Building className="w-5 h-5" />
-                <span>Vacation Rentals</span>
+                <span className="hidden md:block">Vacation Rentals</span>
               </TabsTrigger>
             </TabsList>
           </div>
@@ -169,13 +170,13 @@ export default function SearchBar() {
             "bg-white rounded-full shadow-lg transition-all duration-200 mt-6",
             isSearchFocused ? "rounded-b-none" : ""
           )}>
-            <TabsContent value="hotels" className="mt-0 p-0  rounded-full">
-              <div className="flex flex-col md:flex-row items-stretch gap-2 p-3 rounded-full">
-                <div className="relative w-full flex-1 rounded-full">
+            <TabsContent value="all" className="mt-0 p-0">
+              <div className="flex flex-col md:flex-row items-stretch gap-2 p-3">
+                <div className="relative w-full flex-1">
                   <MapPin className="absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 text-gray-500" />
                   <Input
                     ref={searchInputRef}
-                    placeholder={placeholderByTab[activeTab as keyof typeof placeholderByTab]}
+                    placeholder={'Search Anything'}
                     className="w-full rounded-full pl-10 pr-4 py-6 border-2 focus-visible:ring-0 focus-visible:border-black"
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
@@ -193,25 +194,37 @@ export default function SearchBar() {
                     </button>
                   )}
                 </div>
+                <Button className="rounded-full bg-[#34e0a1] hover:bg-[#2bc889] text-black h-12 font-medium mt-2 md:mt-0">
+                  <Search className="h-4 w-4 mr-2" />
+                  Search
+                </Button>
+              </div>
+            </TabsContent>
+
+            <TabsContent value="hotels" className="mt-0 p-0  rounded-full">
+              <div className="flex flex-col md:flex-row items-stretch gap-2 p-3 rounded-full">
+                <div className="relative w-full flex-1 rounded-full">
+                  <Input
+                    ref={searchInputRef}
+                    placeholder={placeholderByTab[activeTab as keyof typeof placeholderByTab]}
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    onFocus={() => {
+                      setIsSearchFocused(true)
+                      updateSearchInputPosition()
+                    }}
+                  />
+                  {searchQuery && (
+                    <button 
+                      className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700"
+                      onClick={() => setSearchQuery("")}
+                    >
+                      <X className="h-5 w-5" />
+                    </button>
+                  )}
+                </div>
                 <div className="flex flex-col md:flex-row gap-2 mt-2 md:mt-0">
-                  <Popover>
-                    <PopoverTrigger asChild>
-                      <Button
-                        variant="outline"
-                        className="justify-start text-left font-normal rounded-full border-2 h-12"
-                      >
-                        <Calendar className="mr-2 h-4 w-4" />
-                        {date?.from ? 
-                          date.to ? 
-                            `${date.from.toLocaleDateString()} - ${date.to.toLocaleDateString()}` : 
-                            date.from.toLocaleDateString() 
-                          : "Check in - Check out"}
-                      </Button>
-                    </PopoverTrigger>
-                    <PopoverContent className="w-auto p-0" align="start">
-                      <CalendarComponent mode="range" selected={date} onSelect={setDate} initialFocus />
-                    </PopoverContent>
-                  </Popover>
+                  <DatePickerWithRange />
                   <Select value={guests} onValueChange={setGuests}>
                     <SelectTrigger className="rounded-full border-2 h-12">
                       <SelectValue placeholder="Guests" />
@@ -224,7 +237,7 @@ export default function SearchBar() {
                       <SelectItem value="5+">5+ Guests</SelectItem>
                     </SelectContent>
                   </Select>
-                  <Button className="rounded-full bg-[#34e0a1] hover:bg-[#2bc889] text-black h-12 font-medium">
+                  <Button className="rounded-full bg-[#34e0a1] hover:bg-[#2bc889] text-black font-medium">
                     <Search className="h-4 w-4 mr-2" />
                     Search
                   </Button>
@@ -256,7 +269,7 @@ export default function SearchBar() {
                     </button>
                   )}
                 </div>
-                <Button className="rounded-full bg-[#34e0a1] hover:bg-[#2bc889] text-black h-12 font-medium mt-2 md:mt-0">
+                <Button className="rounded-full bg-[#34e0a1] hover:bg-[#2bc889] text-black h-12 px-6 font-medium mt-2 md:mt-0">
                   <Search className="h-4 w-4 mr-2" />
                   Search
                 </Button>

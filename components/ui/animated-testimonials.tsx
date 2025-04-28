@@ -133,15 +133,6 @@ export const AnimatedTestimonials = ({
         
         {/* Right side - Content */}
         <div className="flex flex-col md:col-span-3 bg-white rounded-xl p-6 border border-gray-100 shadow-sm">
-          <div className="flex items-center mb-4">
-            <div className="bg-green-500 rounded-full p-2 mr-2">
-              <Quote className="h-5 w-5 text-white" />
-            </div>
-            <h3 className="text-lg font-bold text-gray-900">
-              Verified Review
-            </h3>
-          </div>
-          
           <motion.div
             key={active}
             initial={{
@@ -190,19 +181,6 @@ export const AnimatedTestimonials = ({
               ))}
             </motion.p>
             
-            <div className="flex items-center">
-              <div className="mr-4">
-                <img 
-                  src={testimonials[active].src} 
-                  alt={testimonials[active].name}
-                  className="w-12 h-12 rounded-full object-cover border-2 border-green-500"
-                />
-              </div>
-              <div>
-                <h4 className="font-bold text-gray-900">{testimonials[active].name}</h4>
-                <p className="text-sm text-gray-600">{testimonials[active].designation}</p>
-              </div>
-            </div>
           </motion.div>
           
           {/* Navigation buttons */}
@@ -226,7 +204,7 @@ export const AnimatedTestimonials = ({
       </div>
       
       {/* TripAdvisor-style trust indicators */}
-      <div className="mt-8 flex flex-wrap justify-center gap-6 text-center text-sm text-gray-600">
+      <div className="hidden md:flex mt-8  flex-wrap justify-center gap-6 text-center text-sm text-gray-600">
         <div className="flex items-center">
           <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />

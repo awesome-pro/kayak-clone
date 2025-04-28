@@ -65,7 +65,7 @@ export default function Dream() {
   };
 
   return (
-    <div className="max-w-6xl mx-auto px-4 py-8">
+    <div className="max-w-screen lg:max-w-6xl mx-auto px-4 py-8">
       {/* Header Section */}
       <div className="mb-6">
         <h2 className="text-3xl font-bold text-slate-900 mb-2">Dream Your Next Trip</h2>

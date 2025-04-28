@@ -65,7 +65,7 @@ export default function Dream2() {
   };
 
   return (
-    <div className="max-w-6xl mx-auto px-4 py-8">
+    <div className="max-w-screen lg:max-w-6xl mx-auto px-4 py-8">
       {/* Header Section */}
       <div className="mb-6">
         <p className="text-slate-700 text-2xl font-semibold">Top Destinations for your next vacation</p>
