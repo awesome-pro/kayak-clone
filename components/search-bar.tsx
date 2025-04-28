@@ -310,11 +310,9 @@ export default function SearchBar() {
             <TabsContent value="vacation-rentals" className="mt-0 p-0">
               <div className="flex flex-col md:flex-row items-stretch gap-2 p-3">
                 <div className="relative w-full flex-1">
-                  <MapPin className="absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 text-gray-500" />
                   <Input
                     ref={searchInputRef}
                     placeholder={placeholderByTab[activeTab as keyof typeof placeholderByTab]}
-                    className="w-full rounded-full pl-10 pr-4 py-6 border-2 focus-visible:ring-0 focus-visible:border-black"
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     onFocus={() => {
@@ -332,25 +330,8 @@ export default function SearchBar() {
                   )}
                 </div>
                 <div className="flex flex-col md:flex-row gap-2 mt-2 md:mt-0">
-                  <Popover>
-                    <PopoverTrigger asChild>
-                      <Button
-                        variant="outline"
-                        className="justify-start text-left font-normal rounded-full border-2 h-12"
-                      >
-                        <Calendar className="mr-2 h-4 w-4" />
-                        {date?.from ? 
-                          date.to ? 
-                            `${date.from.toLocaleDateString()} - ${date.to.toLocaleDateString()}` : 
-                            date.from.toLocaleDateString() 
-                          : "Check in - Check out"}
-                      </Button>
-                    </PopoverTrigger>
-                    <PopoverContent className="w-auto p-0" align="start">
-                      <CalendarComponent mode="range" selected={date} onSelect={setDate} initialFocus />
-                    </PopoverContent>
-                  </Popover>
-                  <Button className="rounded-full bg-[#34e0a1] hover:bg-[#2bc889] text-black h-12 font-medium">
+                  <DatePickerWithRange />
+                  <Button className="rounded-full bg-[#34e0a1] hover:bg-[#2bc889] text-black font-medium">
                     <Search className="h-4 w-4 mr-2" />
                     Search
                   </Button>
